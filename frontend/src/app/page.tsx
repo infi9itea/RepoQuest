@@ -26,6 +26,7 @@ type Quest = {
   steps: string[];
   successCriteria: string[];
   issue: Issue | null;
+  relevantFilePaths?: string[];
   challenge?: {
     question: string;
     options: string[];
@@ -41,6 +42,7 @@ type SavedRun = {
   createdAt: string;
   questTitles: string[];
 };
+
 
 
 type GenerateApiResponse = {
@@ -64,6 +66,7 @@ type GenerateApiResponse = {
     whyItMatters: string;
     steps: string[];
     successCriteria: string[];
+    relevantFilePaths?: string[];
     evidenceIssues?: Array<{
       number: number;
       title: string;
@@ -75,6 +78,7 @@ type GenerateApiResponse = {
     finishReason?: string;
   };
 };
+
 
 const REPOSITORY = {
   name: "next.js",
@@ -415,13 +419,18 @@ export default function Home() {
           id,
           index: String(index + 1).padStart(2, "0"),
           title: generated.title,
-          category: evidence ? "ISSUE INVESTIGATION" : "repoData INVESTIGATION",
+          category: evidence ? "ISSUE INVESTIGATION" : "REPOSITORY ORIENTATION",
           difficulty: generated.difficulty,
           goal: generated.goal,
           whyItMatters: generated.whyItMatters,
           steps: generated.steps,
           successCriteria: generated.successCriteria,
           issue,
+          relevantFilePaths: Array.isArray(generated.relevantFilePaths)
+            ? generated.relevantFilePaths.filter(
+                (path): path is string => typeof path === "string",
+              )
+            : [],
         };
       });
 
@@ -844,10 +853,62 @@ export default function Home() {
                       ))}
                     </ol>
                   </div>
+                      {selectedQuest.relevantFilePaths &&
+  selectedQuest.relevantFilePaths.length > 0 && (
+    <div className="detail-section">
+      <div className="section-label">
+        <span>03</span> SOURCE FILES TO EXPLORE
+      </div>
 
+      <p className="body-copy">
+        These files were matched against the repository file index.
+        Open them to inspect the actual implementation before drawing
+        conclusions.
+      </p>
+
+      <div className="source-file-list">
+        {selectedQuest.relevantFilePaths.map((filePath) => {
+          const repositoryUrl = repoData.url.replace(/\/+$/, "");
+
+          const encodedBranch = repoData.defaultBranch
+            .split("/")
+            .map(encodeURIComponent)
+            .join("/");
+
+          const encodedFilePath = filePath
+            .split("/")
+            .map(encodeURIComponent)
+            .join("/");
+
+          const fileUrl =
+            `${repositoryUrl}/blob/${encodedBranch}/${encodedFilePath}`;
+
+          return (
+            <a
+              className="source-file-link"
+              href={fileUrl}
+              key={filePath}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className="source-file-icon" aria-hidden="true">
+                ↗
+              </span>
+
+              <code>{filePath}</code>
+
+              <span className="source-file-open">
+                OPEN FILE ↗
+              </span>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  )}
                   <div className="detail-section">
                     <div className="section-label">
-                      <span>03</span> WHAT SUCCESS LOOKS LIKE
+<span>04</span> WHAT SUCCESS LOOKS LIKE
                     </div>
                     <ul className="criteria-list">
                       {selectedQuest.successCriteria.map((criterion) => (
@@ -887,7 +948,7 @@ export default function Home() {
                   {selectedChallenge && (
                     <div className="detail-section challenge-section">
                     <div className="section-label">
-                      <span>04</span> CHECK YOUR UNDERSTANDING
+<span>05</span> CHECK YOUR UNDERSTANDING
                     </div>
 
                     <div className="challenge-card">

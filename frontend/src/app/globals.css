@@ -1729,3 +1729,57 @@ button:disabled {
     animation-duration: 0.01ms !important;
   }
 }
+.source-file-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.source-file-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-width: 0;
+  padding: 13px 14px;
+  border: 1px solid #d9d4c8;
+  background: #faf8f2;
+  color: #282a25;
+  text-decoration: none;
+  transition: background-color 160ms ease;
+}
+
+.source-file-link:hover {
+  background: #f0ede4;
+}
+
+.source-file-icon {
+  flex-shrink: 0;
+  font-size: 17px;
+}
+
+.source-file-link code {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.source-file-open {
+  flex-shrink: 0;
+  margin-left: auto;
+  font-size: 9px;
+  letter-spacing: 0.07em;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .source-file-link {
+    flex-wrap: wrap;
+  }
+
+  .source-file-open {
+    margin-left: auto;
+  }
+}
