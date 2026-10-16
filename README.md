@@ -13,6 +13,8 @@ RepoQuest turns a public GitHub repository into three guided developer quests. E
 - Track quest progress and save workspace snapshots in the browser.
 
 ## Architecture
+<img width="2240" height="940" alt="image" src="https://github.com/user-attachments/assets/06f7d95a-1184-4514-8bf7-a9586b8daecb" />
+
 
 - **Frontend:** Next.js, React, TypeScript
 - **Workflow orchestration:** n8n
@@ -46,6 +48,13 @@ RepoQuest turns a public GitHub repository into three guided developer quests. E
 7. Open http://localhost:3000.
 
 Use your actual n8n webhook URL if it differs from the local example.
+
+## How it works
+1. The Next.js route (`/api/generate`) validates the input: HTTPS `github.com/owner/repo` URLs only.
+2. The n8n workflow fetches repository metadata, README, file paths, and recent open issues.
+3. It builds a context from that evidence and asks Gemini to generate three quests.
+4. The response is parsed and validated, including source-file paths, before it reaches the UI. Repos with zero open issues are handled.
+5. Quest progress and workspace snapshots are stored in the browser (`localStorage`).
 
 ## Security
 
