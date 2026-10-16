@@ -142,36 +142,14 @@ button:disabled {
   font-size: 11px;
 }
 
-.topbar-meta,
-.demo-status {
+.topbar-meta {
   display: flex;
   align-items: center;
   gap: 11px;
-}
-
-.topbar-meta {
   color: var(--muted);
   font-family: var(--mono);
   font-size: 10px;
   letter-spacing: 0.045em;
-}
-
-.demo-status {
-  color: var(--forest);
-}
-
-.status-dot {
-  width: 7px;
-  height: 7px;
-  flex: 0 0 7px;
-  background: #66815d;
-  border-radius: 50%;
-}
-
-.topbar-divider {
-  height: 18px;
-  width: 1px;
-  background: var(--line-dark);
 }
 
 /* Main workspace layout */
@@ -195,7 +173,6 @@ button:disabled {
 .eyebrow,
 .tiny-label,
 .form-card-top label,
-.form-card-foot,
 .panel-heading,
 .panel-footer,
 .quest-category,
@@ -430,7 +407,6 @@ button:disabled {
 }
 
 .form-card-top,
-.form-card-foot,
 .repo-form {
   display: flex;
   align-items: center;
@@ -497,18 +473,6 @@ button:disabled {
 .primary-button:hover,
 .dark-button:hover:not(:disabled) {
   background: var(--forest);
-}
-
-.form-card-foot {
-  margin-top: 11px;
-  color: var(--muted);
-  font-size: 9px;
-}
-
-.form-card-foot > span:first-child {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
 }
 
 .notice {
@@ -1549,8 +1513,7 @@ button:disabled {
     font-size: 8px;
   }
 
-  .issue-count-top,
-  .topbar-divider {
+  .issue-count-top {
     display: none;
   }
 
@@ -1637,13 +1600,6 @@ button:disabled {
     width: 100%;
   }
 
-  .form-card-foot {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 5px;
-    font-size: 8px;
-  }
-
   .repo-overview {
     margin: 23px 0 25px;
   }
@@ -1713,10 +1669,6 @@ button:disabled {
   .page-footer {
     flex-wrap: wrap;
     font-size: 7px;
-  }
-
-  .page-footer > span:nth-child(2) {
-    display: none;
   }
 }
 

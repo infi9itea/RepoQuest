@@ -43,8 +43,6 @@ type SavedRun = {
   questTitles: string[];
 };
 
-
-
 type GenerateApiResponse = {
   error?: string;
   repository: {
@@ -72,13 +70,7 @@ type GenerateApiResponse = {
       title: string;
       url: string;
     }>;
-  }>;
-  generation?: {
-    model?: string;
-    finishReason?: string;
-  };
-};
-
+  }>;};
 
 const REPOSITORY = {
   name: "next.js",
@@ -451,7 +443,7 @@ export default function Home() {
       setNotice(
         error instanceof Error
           ? `Generation failed: ${error.message}`
-          : "Generation failed. Check the frontend and n8n logs.",
+          : "Generation failed. Check the server logs.",
       );
     } finally {
       setIsGenerating(false);
@@ -515,11 +507,6 @@ export default function Home() {
         </a>
 
         <div className="topbar-meta">
-          <span className="demo-status">
-            <span className="status-dot" />
-            N8N / LIVE WORKFLOW
-          </span>
-          <span className="topbar-divider" />
           <span className="issue-count-top">VOL. 01 / CODE EXPLORATION</span>
         </div>
       </header>
@@ -649,13 +636,6 @@ export default function Home() {
                 <span aria-hidden="true">{isGenerating ? "…" : "↗"}</span>
               </button>
             </form>
-
-            <div className="form-card-foot">
-              <span>
-                <span className="status-dot" /> n8n workflow ready
-              </span>
-              <span>LIVE GENERATION / n8n</span>
-            </div>
           </section>
 
           {notice && (
@@ -1237,7 +1217,6 @@ export default function Home() {
 
           <footer className="page-footer">
             <span>REPOQUEST / FIELD GUIDE 001</span>
-            <span>N8N / LIVE WORKFLOW</span>
           </footer>
         </section>
       </div>
